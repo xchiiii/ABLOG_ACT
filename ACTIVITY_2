@@ -1,1 +1,14 @@
-SELECT CONCAT (fname," ", lname ) AS FullName FROM client INNER JOIN schedule ON client.client_id = schedule.client_id INNER JOIN trainor ON schedule.sched_id = trainor.sched_id;
+1.
+
+SELECT CONCAT(fname, " ", lname) AS Fullname, SSchedule.session, SSchedule.activity, SSchedule.SDate, SSchedule.time_start, SSchedule.time_end, trainor.name
+FROM ((Client
+INNER JOIN SSchedule ON client.client_ID = SSchedule.client_ID)
+INNER JOIN trainor ON sschedule.trainor_ID = trainor.trainor_ID);
+
+2.
+
+SELECT CONCAT(fname, " ", lname) AS Fullname, reports.total_amount, payment.amout, membership.status_mem
+FROM (((Client
+INNER JOIN reports ON client.client_ID = reports.client_ID)
+INNER JOIN payment ON client.client_ID = payment.client_ID)
+INNER JOIN membership ON client.client_ID = membership.client_ID);
