@@ -1,0 +1,66 @@
+DROP DATABASE databasemanage;
+CREATE DATABASE databasemanage;
+USE  databasemanage;
+
+CREATE TABLE students(
+    studentnum varchar (6),
+    stufname varchar (255),
+    studlname varchar (255),
+    major varchar (255),
+    gender varchar (255),
+    homeaddress varchar (255),
+    PRIMARY KEY (studentnum)
+    );
+
+CREATE TABLE subject(
+    subjectcode varchar (255),
+    subjectdescription varchar (255),
+    PRIMARY KEY (subjectcode)
+
+);
+
+CREATE TABLE grade(
+    subjectcode varchar (255), 
+    studentnum varchar (255),
+    grade float,
+    CONSTRAINT FK_studentnum FOREIGN KEY (studentnum)
+    REFERENCES students (studentnum),
+    CONSTRAINT FK_subjcode FOREIGN KEY (subjectcode)
+    REFERENCES subject (subjectcode)
+);
+INSERT INTO students (studentnum,stufname,studlname,major,gender,homeaddress) VALUE ('S-101','ANA','CRUZ','ECE','F','MALOLOS,BULACAN'),
+ ('S-102','HAZEL','PONCE','COE','F','PLARIDEL,BULACAN'),
+ ('S-103','CRISTOV','CONCIO','ECE','M','MALOLOS,BULACAN'),
+ ('S-104','ARIS','CLAVIO','COE','M','PULILAN,BULACAN'),
+ ('S-105','HONEY','PELAYO','COE','F','MALOLOS,BULACAN'),
+ ('S-106','CARRIE','ABAO','ECE','F','PULILAN,BULACAN');
+
+INSERT INTO subject (subjectcode,subjectdescription) VALUE 
+('CHEM 123','Chemistry'),
+('MATH 122','Trigonometry'),
+('MATH 123','Algebra');
+
+INSERT INTO grade (studentnum, subjectcode, grade) VALUE ('S-101','CHEM 123', 2.00),
+('S-101','MATH 122', 1.00),
+('S-101','MATH 123', 1.50),
+('S-102','CHEM 123', 1.75),
+('S-102','MATH 122', 1.25),
+('S-102','MATH 123', 1.50),
+('S-103','CHEM 123', 2.00),
+('S-103','MATH 122', 1.75),
+('S-103','MATH 123', 1.25),
+('S-104','CHEM 123', 1.25),
+('S-104','MATH 122', 2.25),
+('S-104','MATH 123', 2.50),
+('S-105','CHEM 123', 1.00),
+('S-105','MATH 122', 1.25),
+('S-105','MATH 123', 2.50),
+('S-106','CHEM 123', 1.25),
+('S-106','MATH 122', 1.50),
+('S-106','MATH 123', 1.75)
+;
+
+II
+1. SELECT CONCAT(stufname, " ", studlname) AS Fullname, students.homeaddress FROM students WHERE gender= 'F' AND major= 'ECE' AND homeaddress = 'MALOLOS,BULACAN';
+3. SELECT CONCAT (studlname," ",stufname) AS Fullname, students.gender, students.homeaddress, grade.subjectcode, grade.grade FROM 
+(students INNER JOIN grade ON students.studentnum = grade.studentnum )WHERE major = 'COE'
