@@ -1,0 +1,36 @@
+ACTVITY 4
+
+1
+
+UPDATE reports
+INNER JOIN membership ON reports.client_ID = membership.client_ID
+SET total_amount = total_amount - 2500
+WHERE membership.status_mem = 'Active';
+
+2
+
+UPDATE reports
+INNER JOIN sschedule ON reports.client_ID = sschedule.client_ID
+SET total_amount = total_amount - 5000
+WHERE sschedule.trainor_ID = 1;
+
+3
+
+DELETE FROM sschedule
+WHERE trainor_ID = 2 OR trainor_ID = 3;
+
+4
+
+UPDATE membership
+INNER JOIN sschedule ON membership.client_ID = sschedule.client_ID
+SET status_mem = 'Suspended'
+WHERE sschedule.trainor_ID = 1;
+
+5
+
+UPDATE sschedule
+SET trainor_ID = 1
+WHERE client_ID = 2;
+
+
+
